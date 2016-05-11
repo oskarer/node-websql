@@ -9,17 +9,7 @@
   "bugs": {
     "url": "https://github.com/nolanlawson/node-websql/issues"
   },
-  "main": "lib/index.js",
-  "browser": {
-    "lib/index.js": "lib/browser.js",
-    "crypto": false,
-    "fs": false,
-    "levelup": false,
-    "leveldown": false,
-    "level": false,
-    "rimraf": false,
-    "mkdirp": false
-  },
+  "main": "./dist/bundle.js",
   "keywords": [
     "websql",
     "sql",
