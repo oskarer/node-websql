@@ -29,8 +29,8 @@ describe('node-websql test suite', function () {
   });
 
   require('./test.main.js');
-  require('./test.compaction.js');
-  require('./test.mapreduce.js');
+  // require('./test.compaction.js');
+  // require('./test.mapreduce.js');
   require('./test.attachments.js');
   require('./test.basics.js');
   require('./test.changes.js');

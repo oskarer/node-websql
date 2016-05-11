@@ -17,7 +17,7 @@ function expectError(promise) {
 
 describe('basic test suite', function () {
 
-  this.timeout(60000);
+  this.timeout(1000);
 
   it('throw error for openDatabase args < 1', function () {
     return expectError(Promise.resolve().then(function () {
@@ -56,6 +56,24 @@ describe('basic test suite', function () {
       assert.equal(res.rows.length, 1);
       assert.equal(res.rows.item(0)['1 + 1'], 2);
     });
+  });
+
+  it('handles errors and callback correctly 2', function () {
+    var db = openDatabase(':memory:', '1.0', 'yolo', 100000);
+    console.log(db)
+    return new Promise(function (resolve, reject) {
+      db.transaction(function (txn) {
+        txn.executeSql('CREATE TABLE table1 (bar text);', []);
+        txn.executeSql('INSERT INTO table1 VALUES ("buzz")', []);
+        txn.executeSql('SELECT * FROM table1', [], function (txn, result) {
+          resolve(result);
+        }, function (txn, err) {
+          reject(err);
+        });
+      });
+    }).then(function(res) {
+      console.log('WE HAVE A RESULT', res);
+    })
   });
 
   it('handles an error - select', function () {
